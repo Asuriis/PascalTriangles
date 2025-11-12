@@ -3,13 +3,17 @@
 
 unsigned int* trinomial(int rows) {
     static unsigned int a[100] = { 1 };
-    int current_row = 0;
+    int current_row = 1;
     int arr_pos = 0;
-    int plus2 = 2;
+    int plus2 = 0;
     
     for (int i = 0; i <= rows; i++) {
         int max = current_row - 1;
         int min = max * -1;
+        if (max == 0) {
+            min = 0;
+        }
+        
 
         if (arr_pos - plus2 + 1 >= 100) {
             return 0;
@@ -19,16 +23,16 @@ unsigned int* trinomial(int rows) {
             if (k <= min || k >= max) {
                 a[arr_pos] = 1;
             }
-            if (k == min+1) {
+            else if (k == min+1) {
                 a[arr_pos] = a[arr_pos - plus2] + a[arr_pos - plus2 + 1];
             }
-            if (k == max - 1) {
+            else if (k == max - 1) {
                 a[arr_pos] = a[arr_pos - plus2 - 1] + a[arr_pos - plus2];
             }
             else {
                 a[arr_pos] = a[arr_pos-plus2-1] + a[arr_pos - plus2] + a[arr_pos - plus2+1];
             }
-            printf("%3d", a[arr_pos]);
+            printf("%6u", a[arr_pos]);
             arr_pos++;
         }
         plus2 += 2;
