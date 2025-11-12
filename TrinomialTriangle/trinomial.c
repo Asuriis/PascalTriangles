@@ -10,13 +10,12 @@ unsigned int* trinomial(int rows) {
     for (int i = 0; i <= rows; i++) {
         int max = current_row - 1;
         int min = max * -1;
+        
         if (max == 0) {
             min = 0;
         }
-        
-
         if (arr_pos - plus2 + 1 >= 100) {
-            return 0;
+            return a;
         }
 
         for (int k = min; k <= max; k++) {
@@ -24,7 +23,12 @@ unsigned int* trinomial(int rows) {
                 a[arr_pos] = 1;
             }
             else if (k == min+1) {
-                a[arr_pos] = a[arr_pos - plus2] + a[arr_pos - plus2 + 1];
+                if (k == 0) {//catches an edge case but there's almost certainly a better solution
+                    a[arr_pos] = 1;
+                }
+                else {
+                    a[arr_pos] = a[arr_pos - plus2] + a[arr_pos - plus2 + 1];
+                }
             }
             else if (k == max - 1) {
                 a[arr_pos] = a[arr_pos - plus2 - 1] + a[arr_pos - plus2];
