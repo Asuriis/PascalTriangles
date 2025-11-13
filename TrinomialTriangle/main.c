@@ -1,5 +1,5 @@
 #include "header.h"
 
 void main() {
-	trinomial(15);
+	trinomial(20);
 }

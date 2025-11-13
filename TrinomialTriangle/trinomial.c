@@ -1,19 +1,12 @@
 #include "header.h"
 #include <stdio.h>
+#define ARRAY_MAX 400
 
 unsigned int* trinomial(int rows) {
-    static unsigned int a[200] = { 0 };
+    static unsigned int a[ARRAY_MAX] = { 0 };
     int current_row = 0;
-    
     int arr_pos = 0;
     int plus2 = 0;
-    int absbound = 200;
-
-    if (absbound <= 0) {
-        printf("\n");
-        printf("Out of bounds, quitting.");
-        return a;
-    }
 
     for (int i = 0; i <= rows; i++) {
         int max = current_row - 1;
@@ -42,20 +35,19 @@ unsigned int* trinomial(int rows) {
             else {
                 a[arr_pos] = a[arr_pos-plus2-1] + a[arr_pos - plus2] + a[arr_pos - plus2+1];
             }
+            if (arr_pos >= 200) { //bound protection
+                printf("\nOut of bounds, quitting.");
+                return a;
+            }
             printf("%6u", a[arr_pos]);
             arr_pos++;
         }
         plus2 += 2;
-        absbound -= (2 * current_row) + 1;
         current_row++;
         printf("\n");
     }
     return a;
 }
-
-/*if (arr_pos - plus2 + 1 >= 200) { //bound protection
-            return a;
-        }*/
 
 /*
 to do
