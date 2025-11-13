@@ -2,23 +2,29 @@
 #include <stdio.h>
 
 unsigned int* trinomial(int rows) {
-    static unsigned int a[100] = { 1 };
-    int current_row = 1;
+    static unsigned int a[200] = { 0 };
+    int current_row = 0;
+    
     int arr_pos = 0;
     int plus2 = 0;
-    
+    int absbound = 200;
+
+    if (absbound <= 0) {
+        printf("\n");
+        printf("Out of bounds, quitting.");
+        return a;
+    }
+
     for (int i = 0; i <= rows; i++) {
         int max = current_row - 1;
         int min = max * -1;
         
-        if (max == 0) {
+        if (current_row == 0) {
+            max = 0;
             min = 0;
         }
-        if (arr_pos - plus2 + 1 >= 100) {
-            return a;
-        }
 
-        for (int k = min; k <= max; k++) {
+        for (int k = min; k <= max; k++) { //determines number of positions in current row
             if (k <= min || k >= max) {
                 a[arr_pos] = 1;
             }
@@ -40,11 +46,16 @@ unsigned int* trinomial(int rows) {
             arr_pos++;
         }
         plus2 += 2;
+        absbound -= (2 * current_row) + 1;
         current_row++;
         printf("\n");
     }
     return a;
 }
+
+/*if (arr_pos - plus2 + 1 >= 200) { //bound protection
+            return a;
+        }*/
 
 /*
 to do
