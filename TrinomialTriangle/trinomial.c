@@ -8,9 +8,9 @@ unsigned int* trinomial(int rows) {
     int arr_pos = 0;
     int plus2 = 0;
 
-    for (int i = 0; i <= rows; i++) {
-        int max = current_row - 1;
-        int min = max * -1;
+    for (int i = 0; i < rows; i++) {
+        int max = current_row;
+        int min = -current_row;
         
         if (current_row == 0) {
             max = 0;
